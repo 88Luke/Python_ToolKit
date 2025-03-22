@@ -95,4 +95,24 @@ class DLinkedList:
       index = -1
     return index
 
-  
+  def remove(self, item):
+    # search for the item and remove it
+    # the method assumes the item exists
+    current = self.head
+    previous=None
+    found = False
+    while not found:
+      if current.getData() == item:
+        found = True
+      else:
+        previous = current
+        current = current.getNext()
+    if previous == None: # first node
+      self.head = current.getNext()
+    else:
+      previous.setNext(current.getNext())# not the first node
+    if (current.getNext() != None):# not the last node
+      current.getNext().setPrevious(previous)
+    else: # last node
+      self.tail=previous
+    self.size -= 1
